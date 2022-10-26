@@ -6,9 +6,17 @@ Este projeto é um projeto exemplo de conceitos do dbt usando os dados da Northw
 
 ### Usando o projeto
 
-Para iniciar o projeto você vai precisar ter o dbt instalado no seu computador conforme as instruções neste [link](https://docs.getdbt.com/docs/installation) ou utilizando o [dbt cloud](https://cloud.getdbt.com/).
+1. Para iniciar o projeto você vai precisar ter o dbt instalado no seu computador conforme as instruções neste [link](https://docs.getdbt.com/docs/installation) ou utilizando o [dbt cloud](https://cloud.getdbt.com/).
 
-Você deverá configurar um *profile* para o seu DW adicionando o seguinte trecho de código no arquivo `~/.dbt/profiles.yml` (lembre-se de alterar as variáveis específicas para seu projeto):
+2. Clone este repositório
+   
+3. Acesse o repositório:
+
+```
+cd northwind
+```
+
+4. Você deverá configurar um *profile* para o seu DW adicionando o seguinte trecho de código no arquivo `~/.dbt/profiles.yml` (lembre-se de alterar as variáveis específicas para seu projeto):
 
 ```yaml
 northwind:
@@ -26,7 +34,7 @@ northwind:
       type: bigquery
 ```
 
-Em seguida, teste se a configuração está correta:
+5. Em seguida, teste se a configuração está correta:
 
 ```bash
 dbt debug
@@ -37,17 +45,13 @@ dbt debug
 All checks passed!
 ```
 
-E adicione os dados no DW usando o `seed` (em geral esses dados já estarão disponíveis no DW através do processo de ingestão, aqui usamos o *seed* para facilitar o início do projeto):
+1. (opcional) Se você não fez a ingestão dos dados brutos para o data warehouse, pode fazê-lo utilizando o `dbt seed` (esta prática não é recomendada em projetos reais, somente usada aqui para fins educacionais):
 
 ```
 dbt seed
 ```
 
-Pronto! Você deve ter um 
+Pronto! Você tem um projeto dbt configurado e com dados disponíveis no Data Warehouse.
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+### Saiba mais:
+- Aprenda mais sobre o dbt [na documentação oficial](https://docs.getdbt.com/docs/introduction)
