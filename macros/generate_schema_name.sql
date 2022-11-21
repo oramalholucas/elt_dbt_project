@@ -11,7 +11,7 @@
 
             {{ default_schema }}
         
-        {% elif custom_schema_name = 'erp_northwind' %}
+        {%- elif custom_schema_name == 'erp_northwind' -%}
 
             {{ custom_schema_name | trim }}
 
