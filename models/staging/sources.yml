@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: erp
+    database: eng-analytics-dbt  
+    schema: erp_northwind
+    description: Fonte de dados de vendas do ERP Northwind  
+    tables:
+      - name: employees
+        columns:
+          - name: employee_id
+            tests:
+              - unique
+              - not_null
