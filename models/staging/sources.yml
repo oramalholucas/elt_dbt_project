@@ -7,8 +7,30 @@ sources:
     description: Fonte de dados de vendas do ERP Northwind  
     tables:
       - name: employees
+        description: Tabela contendo os dados dos funcionários da Northwind
         columns:
           - name: employee_id
             tests:
               - unique
               - not_null
+
+      - name: products
+        description: Tabela contendo a relação de produtos vendidos pela Northwind
+
+      - name: categories
+        description: Tabela contendo a categoria dos produtos vendidos pela Northwind
+
+      - name: suppliers
+        description: Tabela contendo os dados dos fornecedores de produtos comercializados pela Northwind
+
+      - name: orders
+        description: Tabela contendo os pedidos da Northwind, uma linha por pedido, inclui pedidos cancelados e deletados
+        columns:
+          - name: order_id
+            description: Chave primária da tabela orders
+            tests:
+              - unique
+              - not_null
+
+      - name: order_details
+        description: Tabela contendo os detalhes de cada pedido da tabela orders Northwind

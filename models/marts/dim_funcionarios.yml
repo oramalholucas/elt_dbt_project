@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_employees
+  - name: dim_funcionarios
     description: Dimensão de funcionários da Northwind
     columns:
       - name: funcionario_id
