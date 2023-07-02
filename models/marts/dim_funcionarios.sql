@@ -14,12 +14,12 @@ with
             , pais
             , notas
             , gerente_id
-        from {{ ref('stg_employees') }}
+        from {{ ref('stg_funcionarios') }}
     )
 
     , erp_managers as (
         select *
-        from {{ ref('stg_employees') }}
+        from {{ ref('stg_funcionarios') }}
     )
 
     , join_employee_to_managers as (
