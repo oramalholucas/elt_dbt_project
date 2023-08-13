@@ -1,19 +1,19 @@
 with
     source_employees as (
         select
-            CAST(employee_id AS INT) as funcionario_id
-            , CAST(last_name AS STRING) as sobrenome
-            , CAST(first_name AS STRING) as nome
-            , CAST(first_name || ' ' || last_name AS STRING) as nome_completo
-            , CAST(birth_date AS DATE) as data_nascimento
-            , CAST(hire_date AS DATE) as data_contratacao
-            , CAST(address AS STRING) as endereco
-            , CAST(city AS STRING) as cidade
-            , CAST(region AS STRING) as regiao
-            , CAST(postal_code AS STRING) as cep
-            , CAST(country AS STRING) as pais
-            , CAST(notes AS STRING) as notas
-            , CAST(reports_to AS INT) as gerente_id
+            cast(employee_id as string) as funcionario_id
+            , cast(last_name as string) as sobrenome
+            , cast(first_name as string) as nome
+            , cast(first_name || ' ' || last_name as string) as nome_completo
+            , cast(birth_date as date) as data_nascimento
+            , cast(hire_date as date) as data_contratacao
+            , cast(address as string) as endereco
+            , cast(city as string) as cidade
+            , cast(region as string) as regiao
+            , cast(postal_code as string) as cep
+            , cast(country as string) as pais
+            , cast(notes as string) as notas
+            , cast(reports_to as string) as gerente_id
         from {{ source('erp', 'employees') }}
     )
 

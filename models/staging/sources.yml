@@ -2,35 +2,162 @@ version: 2
 
 sources:
   - name: erp
-    database: eng-analytics-dbt  
+    database: eng-analytics-dbt
     schema: erp_northwind
-    description: Fonte de dados de vendas do ERP Northwind  
+    description: Fonte de dados de vendas do ERP Northwind
+
     tables:
       - name: employees
-        description: Tabela contendo os dados dos funcionários da Northwind
         columns:
           - name: employee_id
             tests:
               - unique
               - not_null
+          - name: last_name
+          - name: first_name
+          - name: title
+          - name: title_of_courtesy
+          - name: birth_date
+          - name: hire_date
+          - name: address
+          - name: city
+          - name: region
+          - name: postal_code
+          - name: country
+          - name: home_phone
+          - name: extension
+          - name: photo
+          - name: notes
+          - name: reports_to
+          - name: photo_path
 
       - name: products
-        description: Tabela contendo a relação de produtos vendidos pela Northwind
+        columns:
+          - name: product_id
+            tests:
+              - unique
+              - not_null
+          - name: product_name
+          - name: supplier_id
+          - name: category_id
+          - name: quantity_per_unit
+          - name: unit_price
+          - name: units_in_stock
+          - name: units_on_order
+          - name: reorder_level
+          - name: discontinued
 
       - name: categories
-        description: Tabela contendo a categoria dos produtos vendidos pela Northwind
+        columns:
+          - name: category_id
+            tests:
+              - unique
+              - not_null
+          - name: category_name
+          - name: description
+          - name: picture
 
       - name: suppliers
-        description: Tabela contendo os dados dos fornecedores de produtos comercializados pela Northwind
+        columns:
+          - name: supplier_id
+            tests:
+              - unique
+              - not_null
+          - name: company_name
+          - name: contact_name
+          - name: contact_title
+          - name: address
+          - name: city
+          - name: region
+          - name: postal_code
+          - name: country
+          - name: phone
+          - name: fax
+          - name: homepage
 
       - name: orders
-        description: Tabela contendo os pedidos da Northwind, uma linha por pedido, inclui pedidos cancelados e deletados
         columns:
           - name: order_id
             description: Chave primária da tabela orders
             tests:
               - unique
               - not_null
+          - name: customer_id
+          - name: employee_id
+          - name: order_date
+          - name: required_date
+          - name: shipped_date
+          - name: ship_via
+          - name: freight
+          - name: ship_name
+          - name: ship_address
+          - name: ship_city
+          - name: ship_region
+          - name: ship_postal_code
+          - name: ship_country
 
       - name: order_details
-        description: Tabela contendo os detalhes de cada pedido da tabela orders Northwind
+        columns:
+          - name: order_id
+          - name: product_id
+          - name: unit_price
+          - name: quantity
+          - name: discount
+
+      - name: employee_territories
+        columns:
+          - name: employee_id
+          - name: territory_id
+
+      - name: region
+        columns:
+          - name: region_id
+            tests:
+              - unique
+              - not_null
+          - name: region_description
+
+      - name: shippers
+        columns:
+          - name: shipper_id
+            tests:
+              - unique
+              - not_null
+          - name: company_name
+          - name: phone
+
+      - name: territories
+        columns:
+          - name: territory_id
+            tests:
+              - unique
+              - not_null
+          - name: territory_description
+          - name: region_id
+
+      - name: us_states
+        columns:
+          - name: state_id
+            tests:
+              - unique
+              - not_null
+          - name: state_name
+          - name: state_abbr
+          - name: state_region
+
+      - name: customers
+        columns:
+          - name: customer_id
+            tests:
+              - unique
+              - not_null
+          - name: company_name
+          - name: contact_name
+          - name: contact_title
+          - name: address
+          - name: city
+          - name: region
+          - name: postal_code
+          - name: country
+          - name: phone
+          - name: fax

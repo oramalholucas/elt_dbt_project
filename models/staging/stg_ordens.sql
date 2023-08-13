@@ -1,10 +1,10 @@
 with
     fonte_ordens as (
         select
-            cast(order_id as int) id_pedido
-            , cast(employee_id as int) as id_funcionario
+            cast(order_id as string) id_pedido
+            , cast(employee_id as string) as id_funcionario
             , cast(customer_id as string) as id_cliente
-            , cast(ship_via as int) as id_transportadora
+            , cast(ship_via as string) as id_transportadora
             , cast(order_date as date) as data_do_pedido
             , cast(freight as numeric) as frete
             , cast(ship_name as string) as destinatario

@@ -18,7 +18,20 @@ with
     )
 
     , erp_managers as (
-        select *
+        select
+            funcionario_id
+            , sobrenome
+            , nome
+            , nome_completo
+            , data_nascimento
+            , data_contratacao
+            , endereco
+            , cidade
+            , regiao
+            , cep
+            , pais
+            , notas
+            , gerente_id
         from {{ ref('stg_funcionarios') }}
     )
 

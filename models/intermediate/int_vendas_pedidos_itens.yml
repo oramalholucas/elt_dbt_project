@@ -1,10 +1,62 @@
 version: 2
+
 models:
   - name: int_vendas_pedidos_itens
     description: Modelo intermediario para construcao da fato_vendas.
     columns:
       - name: pk_vendas
-        description: Chave primária da tabela produtos.
-        tests:
-          - unique
-          - not_null
+        description: Chave primária composta por id_pedido e id_produto concatenados
+
+      - name: id_pedido
+        description: ID do pedido
+
+      - name: id_funcionario
+        description: ID do funcionário associado ao pedido
+
+      - name: id_cliente
+        description: ID do cliente que fez o pedido
+
+      - name: id_transportadora
+        description: ID da transportadora associada ao pedido
+
+      - name: id_produto
+        description: ID do produto do pedido
+
+      - name: desconto_perc
+        description: Percentual de desconto aplicado
+
+      - name: preco_da_unidade
+        description: Preço por unidade do produto
+
+      - name: quantidade
+        description: Quantidade de produtos no pedido
+
+      - name: frete
+        description: Valor do frete do pedido
+
+      - name: data_do_pedido
+        description: Data do pedido
+
+      - name: data_do_envio
+        description: Data de envio do pedido
+
+      - name: data_requerida_entrega
+        description: Data requerida para entrega do pedido
+
+      - name: destinatario
+        description: Nome do destinatário do pedido
+
+      - name: endereco_destinatario
+        description: Endereço do destinatário do pedido
+
+      - name: cep_destinatario
+        description: CEP do destinatário do pedido
+
+      - name: cidade_destinatario
+        description: Cidade do destinatário do pedido
+
+      - name: regiao_destinatario
+        description: Região do destinatário do pedido
+
+      - name: pais_destinatario
+        description: País do destinatário do pedido

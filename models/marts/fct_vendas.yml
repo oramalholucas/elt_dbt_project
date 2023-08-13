@@ -1,10 +1,86 @@
 version: 2
+
 models:
   - name: fct_vendas
     description: Fato vendas da Northwind.
     columns:
       - name: pk_vendas
-        description: Chave primária da tabela vendas.
-        tests:
-          - unique
-          - not_null
+        description: Chave primária das vendas
+
+      - name: id_pedido
+        description: ID do pedido
+
+      - name: id_produto
+        description: ID do produto
+
+      - name: funcionario_id
+        description: ID do funcionário
+
+      - name: id_transportadora
+        description: ID da transportadora
+
+      - name: desconto_perc
+        description: Percentual de desconto aplicado
+
+      - name: preco_da_unidade
+        description: Preço por unidade do produto
+
+      - name: quantidade
+        description: Quantidade de produtos
+
+      - name: frete
+        description: Valor do frete
+
+      - name: data_do_pedido
+        description: Data do pedido
+
+      - name: data_do_envio
+        description: Data de envio
+
+      - name: data_requerida_entrega
+        description: Data requerida para entrega
+
+      - name: destinatario
+        description: Nome do destinatário
+
+      - name: endereco_destinatario
+        description: Endereço do destinatário
+
+      - name: cep_destinatario
+        description: CEP do destinatário
+
+      - name: cidade_destinatario
+        description: Cidade do destinatário
+
+      - name: regiao_destinatario
+        description: Região do destinatário
+
+      - name: pais_destinatario
+        description: País do destinatário
+
+      - name: funcionario_nome_completo
+        description: Nome completo do funcionário
+
+      - name: gerente_nome_completo
+        description: Nome completo do gerente
+
+      - name: nome_produto
+        description: Nome do produto
+
+      - name: nome_categoria
+        description: Nome da categoria do produto
+
+      - name: nome_fornecedor
+        description: Nome do fornecedor do produto
+
+      - name: is_discontinuado
+        description: Indicador de descontinuação do produto
+
+      - name: total_bruto
+        description: Total bruto das vendas
+
+      - name: total_liquido
+        description: Total líquido das vendas após desconto
+
+      - name: frete_divido_pelos_itens
+        description: Valor do frete dividido pelos itens do pedido

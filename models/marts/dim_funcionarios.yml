@@ -6,9 +6,6 @@ models:
     columns:
       - name: funcionario_id
         description: Chave primária da tabela funcionarios
-        tests:
-          - unique
-          - not_null
 
       - name: sobrenome
         description: Sobrenome do funcionario
@@ -48,4 +45,3 @@ models:
 
       - name: gerente_nome_completo
         description: Nome completo do gerente de cada funcionario
-

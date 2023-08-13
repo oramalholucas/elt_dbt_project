@@ -37,15 +37,13 @@ models:
       +materialized: view
       +schema: stg
 
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+
     marts:
       +materialized: table
       +schema: marts
-
-    intermediate:
-      +materialized: table
-      +schema: marts
-
-
 
 seeds:
   dbt_northwind:

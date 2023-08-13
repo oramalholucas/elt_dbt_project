@@ -1,16 +1,45 @@
 with
     employees as (
-        select *
+        select
+            funcionario_id
+            , nome_completo
+            , gerente_nome_completo
         from {{ ref('dim_funcionarios') }}
     )
+
     , produtos as (
-        select *
+        select
+            id_produto
+            , nome_produto
+            , nome_categoria
+            , nome_fornecedor
+            , is_discontinuado
         from {{ ref('dim_produtos') }}
     )
+
     , pedidos_itens as (
-        select *
+        select
+            pk_vendas
+            , id_pedido
+            , id_funcionario
+            , id_produto
+            , quantidade
+            , preco_da_unidade
+            , desconto_perc
+            , id_transportadora
+            , frete
+            , data_do_pedido
+            , data_do_envio
+            , data_requerida_entrega
+            , destinatario
+            , endereco_destinatario
+            , cep_destinatario
+            , cidade_destinatario
+            , regiao_destinatario
+            , pais_destinatario
         from {{ ref('int_vendas_pedidos_itens') }}
     )
+
     , joined_tabelas as (
         select
             pedidos_itens.pk_vendas
@@ -41,13 +70,38 @@ with
         left join produtos on pedidos_itens.id_produto = produtos.id_produto
         left join employees on pedidos_itens.id_funcionario = employees.funcionario_id
     )
+
     , transformacoes as (
         select
-            *
-            , (preco_da_unidade * quantidade) as total_bruto
-            , (preco_da_unidade * quantidade) * (1 - desconto_perc) as total_liquido
-            , frete / (count(*) over (partition by id_pedido)) as frete_divido_pelos_itens
+            joined_tabelas.pk_vendas
+            , joined_tabelas.id_pedido
+            , joined_tabelas.id_produto
+            , joined_tabelas.funcionario_id
+            , joined_tabelas.id_transportadora
+            , joined_tabelas.desconto_perc
+            , joined_tabelas.preco_da_unidade
+            , joined_tabelas.quantidade
+            , joined_tabelas.frete
+            , joined_tabelas.data_do_pedido
+            , joined_tabelas.data_do_envio
+            , joined_tabelas.data_requerida_entrega
+            , joined_tabelas.destinatario
+            , joined_tabelas.endereco_destinatario
+            , joined_tabelas.cep_destinatario
+            , joined_tabelas.cidade_destinatario
+            , joined_tabelas.regiao_destinatario
+            , joined_tabelas.pais_destinatario
+            , joined_tabelas.funcionario_nome_completo
+            , joined_tabelas.gerente_nome_completo
+            , joined_tabelas.nome_produto
+            , joined_tabelas.nome_categoria
+            , joined_tabelas.nome_fornecedor
+            , joined_tabelas.is_discontinuado
+            , (joined_tabelas.preco_da_unidade * joined_tabelas.quantidade) as total_bruto
+            , (joined_tabelas.preco_da_unidade * joined_tabelas.quantidade) * (1 - desconto_perc) as total_liquido
+            , joined_tabelas.frete / (count(*) over (partition by joined_tabelas.id_pedido)) as frete_divido_pelos_itens
         from joined_tabelas
     )
+
 select *
 from transformacoes
