@@ -1,57 +1,83 @@
-Bem-vindo ao projeto demo da Northwind!
+## ELT e Modelagem de dados com dbt
 
-### O que é este projeto?
+Projeto: Desenvolvimento de um Pipeline de ELT (Extract, Load and Transform) utilizando o dbt (data build tool).
 
-Este projeto é um projeto exemplo de conceitos do dbt usando os dados da Northwind.
+O dbt(data build tool) é um framework Python, ferramenta de código aberto, usada para transformar e modelar dados. 
+O dbt é projetado para ajudar equipes de dados a criar, manter e documentar pipelines de dados de maneira eficiente e colaborativa, trazendo boas práticas de engenharia de software para o mundo do big data.
 
-### Usando o projeto
+## Etapas de Desenvolvimento
 
-1. Para iniciar o projeto você vai precisar ter o dbt instalado no seu computador conforme as instruções neste [link](https://docs.getdbt.com/docs/installation) ou utilizando o [dbt cloud](https://cloud.getdbt.com/).
+1. Instalação e Configuração Inicial
+    - Instalação do dbt e suas dependências.
+    - Configuração do arquivo dbt_project.yml para definir configurações do projeto, como nome, versão e diretórios.
+    - Configuração do arquivo profiles.yml para definir a conexão com o data warehouse.
 
-2. Clone este repositório
+2. Ingestão de Dados
+    - Utilização do comando `dbt seed` para criar as tabelas no schema 'erp' do Google Big Query, a partir de arquivos CSV.
    
-3. Acesse o repositório:
+3. Definição das Sources
+    - Criação do arquivo sources.yml especificando as tabelas fontes que o dbt terá acesso.
+    - Especificação dos testes que serão executados nas sources para garantir a qualidade dos dados.
 
-```
-cd academy-2022-11
-```
+4. Modelagem de dados nas Camadas Bronze, Silver e Gold
+    - Criação dos modelos staging para cada tabela fonte na camada "bronze", selecionando e renomeando campos conforme necessário.
+    - Criação dos modelos intermediate na camada "silver", para realizar joins entre tabelas e aplicar transformações mais complexas.
+    - Criação dos modelos marts na camada "gold", fazendo referência aos modelos intermediate para criar as estruturas analíticas finais.
 
-4. Você deverá configurar um *profile* para o seu DW adicionando o seguinte trecho de código no arquivo `~/.dbt/profiles.yml` (lembre-se de alterar as variáveis específicas para seu projeto):
+5. Documentação e Testes
+    - Criação de arquivos .yml nas camadas "silver" e "gold" para documentar os modelos de dados criados, bem como definição de testes para verificar a integridade dos dados transformados e a qualidade dos resultados.
 
-```yaml
-northwind:
-  outputs:
-    dev:
-      dataset: northwind
-      job_execution_timeout_seconds: 300
-      job_retries: 1
-      keyfile: path/to/keyfile.json
-      location: US
-      method: service-account
-      priority: interactive
-      project: <project_id>
-      threads: 1
-      type: bigquery
-```
+6. Boas Práticas e Versionamento
+    - Execução das boas práticas de engenharia de software como: testes, documentação e versionamento de código.
+    - Colocando em prática um estilo de código consistente (code style).
 
-5. Em seguida, teste se a configuração está correta:
+## Protótipo do Pipeline
 
-```bash
-dbt debug
+<img src="dbt.jpg">
 
-(...)
-  Connection test: [OK connection ok]
+## Passo a Passo
 
-All checks passed!
-```
+Após instalar o dbt e suas dependências e configurar os arquivos `dbt_project.yml` e `profiles.yml`, dei início ao projeto realizando a ingestão dos dados em formato CSV por meio do comando `dbt seed`, isso resultou na criação das tabelas no esquema "erp" dentro do Google BigQuery.
 
-1. (opcional) Se você não fez a ingestão dos dados brutos para o data warehouse, pode fazê-lo utilizando o `dbt seed` (esta prática não é recomendada em projetos reais, somente usada aqui para fins educacionais):
+Em seguida, criei o arquivo `sources.yml`, no qual especifiquei as tabelas fontes que o dbt teria acesso, além de definir os testes que seriam executados nessas fontes para assegurar a integridade dos dados.
 
-```
-dbt seed
-```
+Optei então por estruturar o modelo de dados em três camadas: bronze, silver e gold. Comecei criando os modelos de staging na camada "bronze", onde selecionei e renomeei colunas conforme necessário. 
+Na sequência, desenvolvi os modelos intermediate na camada "silver", realizando junções entre tabelas e aplicando transformações mais complexas.
+Por fim, desenvolvi os modelos marts na camada "gold", chamando os modelos intermediários, realizei alguns ajustes para atender às necessidades da área de negócio, incluindo cálculos e agregações.
 
-Pronto! Você tem um projeto dbt configurado e com dados disponíveis no Data Warehouse.
+Com o intuito de garantir a clareza e documentação de todo o processo, criei arquivos `.yml` nas camadas intermediate e marts, detalhando a finalidades e os campos resultantes dos modelos criados em cada uma das camadas.
 
-### Saiba mais:
-- Aprenda mais sobre o dbt [na documentação oficial](https://docs.getdbt.com/docs/introduction)
+Ao longo de todo o desenvolvimento, aderi a boas práticas de engenharia de software, incluindo a realização de testes rigorosos, documentação abrangente e o uso de um estilo de código coerente.
+O processo foi guiado por princípios de versionamento de código e seguiu as diretrizes de qualidade e eficiência.
+
+## Geração de Valor para o Negócio
+
+#### Qualidade dos Dados:
+Ao aplicar transformações, limpeza e validações nos dados de entrada, o projeto assegura que os dados usados nas análises estejam corretos e confiáveis, reduzindo erros e garantindo tomadas de decisão mais precisas.
+
+#### Eficiência Operacional:
+A estrutura de camadas do dbt (bronze, silver, gold) facilita a preparação dos dados para análise, os modelos intermediários e marts permitem que os analistas tenham acesso a dados prontos para uso, agilizando o processo de análise e permitindo insights mais rápidos.
+
+#### Consistência e Padronização:
+A utilização de boas práticas de engenharia de software e modelagem de dados garante que as transformações e cálculos sejam aplicados de forma consistente em todo o projeto. Isso ajuda a evitar discrepâncias e ambiguidades nos resultados analíticos.
+
+#### Facilidade de Manutenção:
+A estrutura modular do dbt facilita a manutenção contínua do projeto. Se houver alterações nos requisitos de análise ou nos dados fonte, as mudanças podem ser aplicadas em camadas específicas sem afetar todo o pipeline.
+
+#### Escalabilidade:
+Com o dbt, é possível lidar com volumes crescentes de dados, permitindo que o projeto se expanda à medida que a organização cresce e suas necessidades analíticas aumentam.
+
+## Sobre o Desenvolvedor
+
+Lucas Ramalho é formado em Big Data e Inteligência Competitiva pela Descomplica Faculdade Digital. Atua com dados desde 2021, hoje como Analytics Engineer e Sr. BI Developer.
+Passou por diferentes segmentos como Varejo, Logística, Indústria e Tecnologia, sempre com viés analítico.
+Atualmente, trabalha no Grupo BBM um dos principais operadores logísticos do Mercosul, entregando soluções em dados para apoiar a tomada de decisão de toda a companhia.
+Sua rotina consiste em trabalhar para Projetar, Desenvolver, Implementar e Manter Soluções em dados, bem como Desenvolver Pipelines de ETL/ELT, sempre optando pela Otimização de Desempenho e Escalabilidade.
+
+Conheça mais detalhes no [LinkedIn](https://www.linkedin.com/in/olucasramalho/).
+
+Fique a vontade para se conectar nas redes sociais:
+
+<div> 
+  <a href="https://www.linkedin.com/in/olucasramalho/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
+</div>
